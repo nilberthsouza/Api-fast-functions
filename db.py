@@ -14,18 +14,23 @@ class Database:
     def insert(self, title, body):
         self.cur.execute("INSERT INTO notes VALUES(Null,?,?)",(title,body))
         self.conn.commit()
+
     def remove(self,id):
         self.cur.execute("DELETE FROM notes WHERE id=?",(id,))
         self.conn.commit()
+
     def select(self,id):
-        self.cur.execute("SELECT FROM notes WHERE id=?",(id,))
-        self.conn.commit()
+        self.cur.execute("SELECT * FROM notes WHERE id=?",(id,))
+        note = self.cur.fetchall()
+        return note
+
     def update(self,id,title,body):
         self.cur.execute("UPDATE notes SET title=?,body=? WHERE id = ?",(title,body))
+
     def __del__(self):
         self.conn.close()
 
-db = Database("Store.db")
-db.insert("teste titulo 1","asdiaosdjiajsidojaisodjaijsdoaisjdaiosjd")
-db.insert("teste titule 2","ksaldkjasjdkalsjdakjsdlkajsdkjakldsjaksj")
+#db = Database("Store.db")
+#db.insert("lembrar  1","comente essa linha no db.py")
+#db.insert("todo 2","comente essa linha tbm")
 
